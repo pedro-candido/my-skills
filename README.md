@@ -10,3 +10,4 @@ O MySkills é um app que é desenvolvido no curso Ignite da Rocketseat
 - Componentização
 - Uso de FlatList x ScrollView
 - Utilização de hooks
+- Debug
