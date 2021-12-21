@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View,
   TextInput,
-  TouchableOpacity,
   StyleSheet,
   FlatList,
 } from 'react-native';
@@ -14,15 +13,35 @@ const Home = () => {
 
   const [newSkill, setNewSkill] = useState('')
   const [mySkills, setMySkills] = useState([])
+  const [greeting, setGreeting] = useState('')
 
   const handleAddNewSkill = () => {
     setMySkills(oldState => [...oldState, newSkill])
     setNewSkill('')
   }
 
+  useEffect(() => {
+    let hour = new Date().getHours()
+    if (hour < 12) {
+      setGreeting('Good Morning')
+    } else if (hour >= 12 && hour < 18) {
+      setGreeting('Good Afternoon')
+    } else {
+      setGreeting('Good Night')
+    }
+
+
+    console.log(hour)
+  }, [])
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome, Pedro</Text>
+      <View style={styles.header}>
+        <Text style={styles.title}>Welcome, Pedro</Text>
+        <Text style={styles.greeting}>
+          {greeting}
+        </Text>
+      </View>
       <TextInput
         style={styles.input}
         placeholder={'Type your skill'}
@@ -55,7 +74,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     color: '#fff',
-    marginBottom: 20,
   },
   input: {
     padding: 15,
@@ -64,6 +82,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     color: '#fff',
   },
+  greeting: {
+    color: '#fff',
+    fontSize: 14
+  },
+  header: {
+    marginBottom: 20,
+  }
 
 });
 
